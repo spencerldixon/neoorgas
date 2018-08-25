@@ -1,0 +1,55 @@
+<div class="my-10">
+  <h1 class="display-4">Should I buy NEO or GAS?</h1>
+  <p class="lead">Automatically calculate the ROI of selling your NEO now, buying GAS, and flipping back into NEO later once the NEO to GAS ratio has changed. Prices refresh every hour. If you find this useful, please leave a tip at: ETH: 0x000000000000000</p>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header">Gas</h5>
+      <div class="card-body">
+        <p class="card-text display-3">$<%= @gas_price.round(2) %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-0 text-success">
+      <div class="card-body">
+        <div class="card-text lead">is</div>
+        <div class="card-text display-4"><%= @gas_ratio.round(2) %>%</div>
+        <div class="card-text lead">of</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header">Neo</h5>
+      <div class="card-body">
+        <p class="card-text display-3">$<%= @neo_price.round(2) %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-10">
+  <div class="col">
+    <p class="lead">Enter your quantity of NEO and click Calculate</p>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <%= form_tag('/', method: :get, class: 'form-inline') do %>
+      <%= text_field_tag :neo_qty, params["neo_qty"], placeholder: "100", class: "form-control" %>
+      <%= submit_tag "Calculate", class: "btn btn-primary ml-2" %>
+    <% end %>
+</div>
+
+<div class="row mt-3 mb-10">
+  <div class="col">
+    <p class="lead">Your <%= @neo_qty %> NEO are currently worth approx $<%= number_with_delimiter(@neo_total_value.round(2), :delimiter => ',') %> or <%= number_with_delimiter(@gas_qty.round(2), delimiter: ',') %> GAS.</p>
+  </div>
+</div>
+
+<%= react_component("NeoCalculator", { neo_price: @neo_price, gas_price: @gas_price, neo_qty: @neo_qty, gas_qty: @gas_qty }) %>
