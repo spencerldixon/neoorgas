@@ -1,4 +1,4 @@
-import '/assets/rc-slider/assets/index.css';
+import 'rc-slider/assets/index.css';
 import React from "react"
 import ReactDOM from 'react-dom';
 import Slider from 'rc-slider';
